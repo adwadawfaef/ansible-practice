@@ -1,2 +1,8 @@
-ansible-ping:
-	ansible all -i inventory.ini -u root -m ping
+install:
+	ansible-playbook playbook.yml -i inventory.ini
+
+packages:
+	ansible-playbook playbook.yml -i inventory.ini --tags packages
+
+users:
+	ansible-playbook playbook.yml -i inventory.ini --tags users
