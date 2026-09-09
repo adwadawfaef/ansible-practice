@@ -1,0 +1,30 @@
+---
+- name: Configure nginx
+  hosts: servers
+  become: true
+
+  tasks:
+    - name: Install nginx
+      ansible.builtin.apt:
+        name: nginx
+        state: present
+
+    - name: Copy index.html
+      ansible.builtin.copy:
+        src: /home/stepa/Documents/hexlet/files/nginx.conf
+        dest: /usr/share/nginx/html/index.html
+        mode: '0644'
+
+    - name: Copy nginx configuration
+      ansible.builtin.copy:
+        src: files/nginx.conf
+        dest: /etc/nginx/nginx.conf
+        mode: '0644'
+      notify:
+        - restart nginx
+
+  handlers:
+    - name: restart nginx
+      ansible.builtin.service:
+        name: nginx
+        state: restarted
