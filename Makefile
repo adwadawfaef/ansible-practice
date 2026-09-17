@@ -6,3 +6,6 @@ packages:
 
 users:
 	ansible-playbook playbook.yml -i inventory.ini --tags users
+
+make say-hello
+Hello, World!
